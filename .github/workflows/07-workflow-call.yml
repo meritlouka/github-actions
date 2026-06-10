@@ -1,5 +1,21 @@
 name: 07 - Reusable (workflow_call)
 
+# How to trigger:
+#   Cannot be run directly. Call it from another workflow:
+#
+#     # .github/workflows/caller.yml
+#     name: Caller
+#     on: [push]
+#     jobs:
+#       ci:
+#         uses: ./.github/workflows/07-workflow-call.yml
+#         with:
+#           node-version: '20'
+#         secrets:
+#           npm-token: ${{ secrets.NPM_TOKEN }}
+#
+#   Cross-repo:  uses: owner/repo/.github/workflows/07-workflow-call.yml@main
+#
 # Make this workflow callable from another workflow.
 # Call it with:
 #   jobs:

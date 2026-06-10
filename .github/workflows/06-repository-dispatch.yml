@@ -1,5 +1,18 @@
 name: 06 - Repository Dispatch
 
+# How to trigger:
+#   Requires a PAT (classic) with `repo` scope, or a fine-grained token with
+#   "Contents: write".
+#     gh api repos/:owner/:repo/dispatches \
+#       -f event_type=build-docs \
+#       -F client_payload[ref]=main
+#   Or curl:
+#     curl -X POST -H "Authorization: token $GH_TOKEN" \
+#       -H "Accept: application/vnd.github+json" \
+#       https://api.github.com/repos/OWNER/REPO/dispatches \
+#       -d '{"event_type":"build-docs","client_payload":{"ref":"main"}}'
+#   Only the listed `types` will activate this workflow.
+#
 # Triggered externally via the REST API:
 #   POST /repos/:owner/:repo/dispatches
 #   { "event_type": "build-docs", "client_payload": { "ref": "main" } }

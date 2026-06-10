@@ -1,5 +1,16 @@
 name: 13 - Deployment & Status
 
+# How to trigger:
+#   deployment:
+#     gh api repos/:owner/:repo/deployments \
+#       -f ref=main -f environment=staging -f auto_merge=false
+#   deployment_status:
+#     gh api repos/:owner/:repo/deployments/<id>/statuses \
+#       -f state=success -f environment=staging
+#   status:
+#     gh api repos/:owner/:repo/statuses/<sha> \
+#       -f state=success -f context=ci/manual
+#
 # `deployment` fires when a Deployment is created via API.
 # `deployment_status` fires when the deployment's status changes.
 # `status` fires on commit status updates.

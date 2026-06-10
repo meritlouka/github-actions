@@ -1,5 +1,11 @@
 name: 03 - Pull Request Target
 
+# How to trigger:
+#   Open a PR from a FORK of this repo against `main`. The workflow runs in the
+#   context of the base repo (this one), not the fork, so it has access to
+#   secrets. Pushing to your own branches will not trigger it meaningfully.
+#   Test locally by forking the repo with another account and opening a PR.
+#
 # Like `pull_request` but runs in the context of the BASE repo with read/write
 # access to secrets. Useful for labeling/commenting on PRs from forks.
 # WARNING: do NOT check out untrusted PR code with this trigger.

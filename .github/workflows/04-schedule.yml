@@ -1,5 +1,11 @@
 name: 04 - Schedule
 
+# How to trigger:
+#   Automatic – GitHub fires it on the cron schedule (UTC). Note: scheduled
+#   runs only execute on the DEFAULT branch and may be delayed under load.
+#   To test without waiting, also add `workflow_dispatch:` and run manually:
+#     gh workflow run "04 - Schedule"
+#
 # Cron syntax (UTC). Minimum interval: every 5 minutes.
 # Fields: minute hour day-of-month month day-of-week
 on:

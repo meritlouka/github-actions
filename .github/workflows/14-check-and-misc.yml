@@ -1,5 +1,20 @@
 name: 14 - Misc Webhook Events
 
+# How to trigger:
+#   check_run / check_suite:  produced by GitHub Apps (e.g. CI providers) via
+#                             the Checks API. Re-run a check from the PR UI to
+#                             fire `rerequested`.
+#   label:        gh label create demo --color FF0000
+#                 gh label edit demo --description "x"
+#                 gh label delete demo --yes
+#   milestone:    Repo -> Issues -> Milestones -> New milestone (or gh api ...)
+#   page_build:   push a change to the gh-pages branch (requires Pages enabled)
+#   public:       Repo Settings -> Change visibility -> Make public
+#   registry_package: publish a package to GitHub Packages tied to this repo
+#   gollum:       edit/create a Wiki page (requires Wiki enabled)
+#   member:       Repo Settings -> Collaborators -> add/remove a user
+#   project:      create/update a (classic) project board on this repo
+#
 # A grab bag of less-common but valid triggers.
 on:
   check_run:

@@ -1,5 +1,11 @@
 name: 09 - Issues & Comments
 
+# How to trigger:
+#   Open or comment on an issue:
+#     gh issue create --title "Test" --body "Triggering workflow"
+#     gh issue comment <number> --body "hello"
+#     gh issue edit <number> --add-label bug
+#
 # Issue activity types: opened, edited, deleted, transferred, pinned, unpinned,
 # closed, reopened, assigned, unassigned, labeled, unlabeled, locked, unlocked,
 # milestoned, demilestoned.

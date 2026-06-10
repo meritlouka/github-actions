@@ -1,5 +1,11 @@
 name: 12 - Discussions
 
+# How to trigger:
+#   Discussions must be enabled: Repo Settings -> Features -> Discussions.
+#   Then create or comment on a discussion via the UI, or:
+#     gh api graphql -f query='mutation { createDiscussion(...) { ... } }'
+#   `answered` fires when a comment is marked as the answer in Q&A categories.
+#
 # Activity types: created, edited, deleted, transferred, pinned, unpinned,
 # labeled, unlabeled, locked, unlocked, category_changed, answered, unanswered.
 on:

@@ -1,5 +1,12 @@
 name: 01 - Push
 
+# How to trigger:
+#   git commit --allow-empty -m "trigger push"
+#   git push origin main
+# Or push a matching tag:
+#   git tag v1.0.0 && git push origin v1.0.0
+# Will NOT trigger if only files under src/**/*.md change (paths filter).
+#
 # Runs when commits are pushed.
 # Filters: branches, branches-ignore, tags, tags-ignore, paths, paths-ignore.
 on:

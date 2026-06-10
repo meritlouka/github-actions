@@ -1,5 +1,17 @@
 name: 05 - Manual (workflow_dispatch)
 
+# How to trigger:
+#   UI: Actions tab -> "05 - Manual" -> "Run workflow" -> fill inputs.
+#   CLI:
+#     gh workflow run "05 - Manual (workflow_dispatch)" \
+#       --ref main \
+#       -f environment=staging \
+#       -f version=1.2.3 \
+#       -f dry_run=true
+#   API:
+#     POST /repos/:owner/:repo/actions/workflows/05-workflow-dispatch.yml/dispatches
+#     { "ref": "main", "inputs": { "environment": "staging", "version": "1.2.3" } }
+#
 # Adds a "Run workflow" button in the Actions UI. Supports typed inputs.
 on:
   workflow_dispatch:

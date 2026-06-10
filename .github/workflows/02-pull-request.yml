@@ -1,5 +1,11 @@
 name: 02 - Pull Request
 
+# How to trigger:
+#   git checkout -b feature/test && git commit --allow-empty -m "x" && git push -u origin feature/test
+#   gh pr create --base main --head feature/test --title "Test PR" --body ""
+# Re-trigger by pushing more commits (synchronize) or marking ready_for_review:
+#   gh pr ready <number>
+#
 # Activity types: opened, synchronize, reopened, closed, edited, labeled,
 # unlabeled, assigned, unassigned, review_requested, review_request_removed,
 # ready_for_review, converted_to_draft, locked, unlocked, milestoned, demilestoned,

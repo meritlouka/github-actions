@@ -1,5 +1,11 @@
 name: 11 - Create / Delete / Fork / Watch
 
+# How to trigger:
+#   create:  git push origin -u feature/new-branch    (or push a new tag)
+#   delete:  git push origin --delete feature/new-branch
+#   fork:    click "Fork" on GitHub (from another account)
+#   watch:   click the "Star" button on the repo (type: started)
+#
 # Fires when a branch/tag is created or deleted, when the repo is forked,
 # or when someone stars it (`watch` with type `started`).
 on:

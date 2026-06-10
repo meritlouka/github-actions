@@ -1,5 +1,11 @@
 name: 08 - Workflow Run
 
+# How to trigger:
+#   Automatic – runs after any workflow listed in `workflows:` completes on the
+#   matching branch. To test, push to `main` so "01 - Push" runs; this one
+#   will then fire on completion.
+#   Note: `workflow_run` workflows only run from the default branch's copy.
+#
 # Triggers AFTER another workflow finishes. Useful for post-processing,
 # notifications, or coordinated pipelines.
 on:
