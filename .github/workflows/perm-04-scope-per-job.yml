@@ -1,0 +1,35 @@
+name: Perm 04 - Per-Job Scopes
+
+# Workflow-level `permissions:` sets a default for every job.
+# A job can OVERRIDE that default with its own `permissions:` block.
+# Pattern: keep the workflow strict, widen only the one job that needs it.
+#
+# How to trigger:
+#   gh workflow run "Perm 04 - Per-Job Scopes"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read          # workflow default
+
+jobs:
+  reader:
+    runs-on: ubuntu-latest
+    # inherits the workflow default: contents:read, nothing else
+    steps:
+      - run: echo "I can only read repository contents."
+
+  writer:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write        # ← extra scope, ONLY for this job
+    steps:
+      - name: Create a demo issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue create \
+            --title "Perm 04 demo issue – delete me" \
+            --body "Created by workflow ${{ github.workflow }} run ${{ github.run_id }}"

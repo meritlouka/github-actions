@@ -1,0 +1,34 @@
+name: Perm 01 - Default GITHUB_TOKEN
+
+# Shows the auto-minted GITHUB_TOKEN that every run gets, plus the metadata
+# you can read about it. No `permissions:` block here, so the token uses
+# the org/repo default (recommended: read-only).
+#
+# How to trigger:
+#   gh workflow run "Perm 01 - Default GITHUB_TOKEN"
+
+on:
+  workflow_dispatch:
+
+jobs:
+  inspect-token:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print run + token metadata
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "Workflow: ${{ github.workflow }}"
+          echo "Run actor: ${{ github.actor }}"
+          echo "Repo:      ${{ github.repository }}"
+          echo "Ref:       ${{ github.ref }}"
+          echo "SHA:       ${{ github.sha }}"
+          echo
+          echo "Token length (proves it's set, never print the token itself):"
+          echo -n "$GH_TOKEN" | wc -c
+
+      - name: Use the token to call the GitHub API (read-only)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api repos/${{ github.repository }} --jq '.full_name, .visibility, .default_branch'

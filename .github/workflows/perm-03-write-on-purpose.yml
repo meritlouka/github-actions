@@ -1,0 +1,32 @@
+name: Perm 03 - Opt-In Write (label PRs)
+
+# Grants ONLY the write scope that this workflow needs:
+#   pull-requests: write   -> label/comment/close PRs
+# Everything else stays at "none" or "read".
+#
+# How to trigger:
+#   Open a PR (or rerun this workflow manually with a PR number input).
+
+on:
+  pull_request:
+    types: [opened, reopened]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to label'
+        required: true
+        type: number
+
+permissions:
+  contents: read
+  pull-requests: write   # ← the only write scope we asked for
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add a "ci-touched" label
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR: ${{ inputs.pr_number || github.event.pull_request.number }}
+        run: gh pr edit "$PR" --add-label ci-touched

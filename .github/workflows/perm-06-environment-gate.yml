@@ -1,0 +1,56 @@
+name: Perm 06 - Environment Gate
+
+# Shows how an `environment:` block adds:
+#   1. Required reviewers (manual approval before the job runs)
+#   2. Wait timer
+#   3. Environment-scoped secrets (only injected when this env is targeted)
+#
+# Before running, create the environments in:
+#   Settings → Environments → New environment
+#
+#   staging:
+#     - no reviewers, no wait timer
+#     - env secret: DEPLOY_TOKEN = "staging-token-xyz"
+#   production:
+#     - required reviewer: yourself
+#     - wait timer: 1 minute
+#     - env secret: DEPLOY_TOKEN = "prod-token-abc"
+#     - deployment branches: main only
+#
+# How to trigger:
+#   gh workflow run "Perm 06 - Environment Gate" -f target=staging
+#   gh workflow run "Perm 06 - Environment Gate" -f target=production
+# When target=production, the job will PAUSE until you approve it in the UI.
+
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Which environment to deploy to'
+        type: choice
+        options: [staging, production]
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.target }}
+      url: https://example.com/${{ inputs.target }}
+    steps:
+      - name: Show that the right env secret was injected
+        env:
+          DEPLOY_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+        run: |
+          echo "Deploying to: ${{ inputs.target }}"
+          echo "Token length: $(echo -n "$DEPLOY_TOKEN" | wc -c)"
+          echo "(GitHub picked the env-scoped DEPLOY_TOKEN automatically)"
+
+      - name: Pretend to deploy
+        run: |
+          echo "Running deploy script for ${{ inputs.target }}…"
+          sleep 2
+          echo "Done."
