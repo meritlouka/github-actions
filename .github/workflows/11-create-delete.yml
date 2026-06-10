@@ -1,0 +1,16 @@
+name: 11 - Create / Delete / Fork / Watch
+
+# Fires when a branch/tag is created or deleted, when the repo is forked,
+# or when someone stars it (`watch` with type `started`).
+on:
+  create:
+  delete:
+  fork:
+  watch:
+    types: [started]
+
+jobs:
+  log:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "event=${{ github.event_name }} ref_type=${{ github.event.ref_type }}"

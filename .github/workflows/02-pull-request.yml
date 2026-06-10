@@ -1,0 +1,20 @@
+name: 02 - Pull Request
+
+# Activity types: opened, synchronize, reopened, closed, edited, labeled,
+# unlabeled, assigned, unassigned, review_requested, review_request_removed,
+# ready_for_review, converted_to_draft, locked, unlocked, milestoned, demilestoned,
+# auto_merge_enabled, auto_merge_disabled.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+
+jobs:
+  lint:
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "PR #${{ github.event.pull_request.number }} - ${{ github.event.action }}"

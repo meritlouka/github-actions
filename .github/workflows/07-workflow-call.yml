@@ -1,0 +1,36 @@
+name: 07 - Reusable (workflow_call)
+
+# Make this workflow callable from another workflow.
+# Call it with:
+#   jobs:
+#     ci:
+#       uses: ./.github/workflows/07-workflow-call.yml
+#       with:
+#         node-version: '20'
+#       secrets:
+#         npm-token: ${{ secrets.NPM_TOKEN }}
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        type: string
+        required: true
+    secrets:
+      npm-token:
+        required: false
+    outputs:
+      build-id:
+        description: 'ID of the build'
+        value: ${{ jobs.build.outputs.build-id }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      build-id: ${{ steps.set.outputs.id }}
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+      - id: set
+        run: echo "id=$(date +%s)" >> "$GITHUB_OUTPUT"

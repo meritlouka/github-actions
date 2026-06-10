@@ -1,0 +1,16 @@
+name: 06 - Repository Dispatch
+
+# Triggered externally via the REST API:
+#   POST /repos/:owner/:repo/dispatches
+#   { "event_type": "build-docs", "client_payload": { "ref": "main" } }
+on:
+  repository_dispatch:
+    types: [build-docs, run-e2e]
+
+jobs:
+  handle:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "event_type=${{ github.event.action }}"
+          echo "payload=${{ toJSON(github.event.client_payload) }}"

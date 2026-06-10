@@ -1,0 +1,32 @@
+name: 05 - Manual (workflow_dispatch)
+
+# Adds a "Run workflow" button in the Actions UI. Supports typed inputs.
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        type: choice
+        options: [staging, production]
+        default: staging
+        required: true
+      version:
+        description: 'Release version'
+        type: string
+        required: true
+      dry_run:
+        description: 'Dry run?'
+        type: boolean
+        default: true
+      release_branch:
+        description: 'Branch to deploy from'
+        type: environment
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "env=${{ inputs.environment }}"
+          echo "version=${{ inputs.version }}"
+          echo "dry_run=${{ inputs.dry_run }}"

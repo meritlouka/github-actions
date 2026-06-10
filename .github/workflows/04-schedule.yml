@@ -1,0 +1,14 @@
+name: 04 - Schedule
+
+# Cron syntax (UTC). Minimum interval: every 5 minutes.
+# Fields: minute hour day-of-month month day-of-week
+on:
+  schedule:
+    - cron: '0 6 * * 1-5'   # 06:00 UTC, Mon-Fri
+    - cron: '*/15 * * * *'  # every 15 minutes
+
+jobs:
+  nightly:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Scheduled run at $(date -u)"

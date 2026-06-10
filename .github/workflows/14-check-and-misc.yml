@@ -1,0 +1,27 @@
+name: 14 - Misc Webhook Events
+
+# A grab bag of less-common but valid triggers.
+on:
+  check_run:
+    types: [created, completed, rerequested, requested_action]
+  check_suite:
+    types: [completed]
+  label:
+    types: [created, edited, deleted]
+  milestone:
+    types: [created, closed, opened, edited, deleted]
+  page_build:
+  public:               # repo switched from private to public
+  registry_package:
+    types: [published, updated]
+  gollum:               # wiki page created/updated
+  member:
+    types: [added, edited, removed]
+  project:
+    types: [created, updated, closed, reopened, edited, deleted]
+
+jobs:
+  log:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Fired: ${{ github.event_name }} / ${{ github.event.action }}"

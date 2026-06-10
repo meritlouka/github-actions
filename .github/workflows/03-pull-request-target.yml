@@ -1,0 +1,16 @@
+name: 03 - Pull Request Target
+
+# Like `pull_request` but runs in the context of the BASE repo with read/write
+# access to secrets. Useful for labeling/commenting on PRs from forks.
+# WARNING: do NOT check out untrusted PR code with this trigger.
+on:
+  pull_request_target:
+    types: [opened, reopened]
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - run: echo "Welcoming PR from ${{ github.event.pull_request.head.repo.full_name }}"

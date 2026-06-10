@@ -1,0 +1,13 @@
+name: 10 - Release
+
+# Activity types: published, unpublished, created, edited, deleted,
+# prereleased, released.
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Released ${{ github.event.release.tag_name }}"

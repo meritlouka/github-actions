@@ -1,0 +1,22 @@
+name: 01 - Push
+
+# Runs when commits are pushed.
+# Filters: branches, branches-ignore, tags, tags-ignore, paths, paths-ignore.
+on:
+  push:
+    branches:
+      - main
+      - 'feature/**'      # glob supported
+    branches-ignore:
+      - 'tmp/**'          # cannot be combined with `branches` in real configs; shown for reference
+    tags:
+      - 'v*.*.*'
+    paths:
+      - 'src/**'
+      - '!src/**/*.md'    # negate pattern
+
+jobs:
+  log:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Pushed ${GITHUB_REF} by ${GITHUB_ACTOR}"
