@@ -29,4 +29,4 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR: ${{ inputs.pr_number || github.event.pull_request.number }}
-        run: gh pr edit "$PR" --add-label ci-touched
+        run: gh pr edit "$PR" --repo ${{ github.repository }} --add-label ci-touched

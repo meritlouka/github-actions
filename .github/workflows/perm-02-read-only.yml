@@ -21,4 +21,5 @@ jobs:
       - name: List 3 most recent issues (read-only API call)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh issue list --limit 3 --json number,title,state
+        # --repo tells `gh` which repo to query without needing a git checkout.
+        run: gh issue list --repo ${{ github.repository }} --limit 3 --json number,title,state

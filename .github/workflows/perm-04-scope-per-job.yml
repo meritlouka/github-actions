@@ -31,5 +31,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh issue create \
+            --repo ${{ github.repository }} \
             --title "Perm 04 demo issue – delete me" \
             --body "Created by workflow ${{ github.workflow }} run ${{ github.run_id }}"
